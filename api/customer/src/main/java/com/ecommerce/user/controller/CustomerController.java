@@ -21,6 +21,11 @@ public class CustomerController {
         return userService.listCustomers().stream().map(CustomerResponse::new).collect(Collectors.toList());
     }
 
+    @GetMapping("/{cpf}")
+    public CustomerResponse getCustomer(@PathVariable String cpf) {
+        return new CustomerResponse(userService.getCustomerByCpf(cpf));
+    }
+
     @PostMapping
     public CustomerResponse saveUser(@RequestBody CustomerRequest customerRequest) {
         return userService.createUser(customerRequest);

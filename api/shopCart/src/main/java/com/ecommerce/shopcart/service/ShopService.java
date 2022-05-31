@@ -1,6 +1,6 @@
 package com.ecommerce.shopcart.service;
 
-import com.ecommerce.shopcart.model.Shop;
+import com.ecommerce.shopcart.model.ShopCart;
 import com.ecommerce.shopcart.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,14 +11,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ShopService {
 
-    private final ShopRepository ShopRepository;
+    private final ShopRepository shopRepository;
 
-    public Page<Shop> listShopCart(Pageable pageable) {
-        return ShopRepository.findAll(pageable);
+    public Page<ShopCart> listShopCart(Pageable pageable) {
+        return shopRepository.findAll(pageable);
     }
 
-    public Shop createShopCart(Shop shop) {
-        return ShopRepository.save(shop);
+    public ShopCart createShopCart(ShopCart shop) {
+        return shopRepository.save(shop);
     }
 
+    public ShopCart updateShopCart(ShopCart shopCart) {
+        //Update an existing shopCart
+        return shopRepository.save(shopCart);
+    }
 }

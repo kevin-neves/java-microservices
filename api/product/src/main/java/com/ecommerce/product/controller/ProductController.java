@@ -18,8 +18,13 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public Page<Product> getProducts(Pageable pageable){
+    public Page<ProductResponse> getProducts(Pageable pageable){
         return productService.listAll(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public ProductResponse getProduct(@PathVariable Integer id){
+        return productService.findById(id);
     }
 
     @PostMapping

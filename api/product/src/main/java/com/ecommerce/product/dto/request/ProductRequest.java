@@ -11,7 +11,7 @@ import lombok.Setter;
 public class ProductRequest {
     private String name;
     private String description;
-    private Double price;
+    private Float price;
     private Boolean inStock;
     private String size;
     private String color;

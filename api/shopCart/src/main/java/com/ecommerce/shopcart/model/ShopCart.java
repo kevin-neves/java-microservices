@@ -3,6 +3,7 @@ package com.ecommerce.shopcart.model;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 @Getter
@@ -10,8 +11,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "purchase")
-public class Shop {
+@Entity(name = "shop_cart")
+public class ShopCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,11 @@ public class Shop {
     @Column(name = "total_price")
     private Double total;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id")
-//    private Customer customer;
+    @Column(name = "status")
+    private String status;
 
-//    @ManyToMany(mappedBy = "purchases", cascade = CascadeType.ALL)
-//    private List<Product> productList;
+    //Products
+    @OneToMany(mappedBy = "shopCart", cascade = CascadeType.ALL)
+    private List<Product> products;
+
 }

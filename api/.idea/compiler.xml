@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shopCart" />
         <module name="product" />
+        <module name="shopCart" />
         <module name="customer" />
+        <module name="shop-validator" />
       </profile>
     </annotationProcessing>
   </component>

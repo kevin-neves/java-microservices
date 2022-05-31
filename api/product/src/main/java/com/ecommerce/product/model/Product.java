@@ -30,7 +30,7 @@ public class Product {
     private String description;
 
     @Column(name = "store_price")
-    private Double price;
+    private Float price;
 
     @Column(name = "in_stock")
     private Boolean inStock;
@@ -46,12 +46,4 @@ public class Product {
 
     @Column(name = "product_quantity")
     private Integer quantity;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "purchase_products",
-//            joinColumns = { @JoinColumn(name = "product_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "purchase_id") }
-//    )
-//    private List<Purchase> purchases;
 }

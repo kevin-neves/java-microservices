@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/api/customer/customer.iml" filepath="$PROJECT_DIR$/api/customer/customer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/java-ecommerce-microservices.iml" filepath="$PROJECT_DIR$/.idea/java-ecommerce-microservices.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api/product/product.iml" filepath="$PROJECT_DIR$/api/product/product.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api/shopCart/shopCart.iml" filepath="$PROJECT_DIR$/api/shopCart/shopCart.iml" />
     </modules>
   </component>
 </project>

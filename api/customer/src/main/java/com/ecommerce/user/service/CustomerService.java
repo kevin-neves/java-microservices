@@ -24,4 +24,8 @@ public class CustomerService {
         customerRepository.save(user);
         return new CustomerResponse(user);
     }
+
+    public Customer getCustomerByCpf(String cpf) {
+        return customerRepository.findByCpf(cpf);
+    }
 }
