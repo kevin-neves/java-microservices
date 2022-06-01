@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/api/shopCart/pom.xml" />
         <option value="$PROJECT_DIR$/shop-validator/pom.xml" />
         <option value="$PROJECT_DIR$/api/shopValidator/pom.xml" />
+        <option value="$PROJECT_DIR$/api/eureka-server/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -18,4 +19,7 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="corretto-11" project-jdk-type="JavaSDK" />
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
 </project>
