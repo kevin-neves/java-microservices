@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/shop-validator/pom.xml" />
         <option value="$PROJECT_DIR$/api/shopValidator/pom.xml" />
         <option value="$PROJECT_DIR$/api/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/api/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/api/actuator/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
