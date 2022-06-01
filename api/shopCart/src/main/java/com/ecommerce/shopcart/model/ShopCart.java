@@ -8,9 +8,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity(name = "shop_cart")
 public class ShopCart {
 
@@ -30,5 +30,4 @@ public class ShopCart {
     //Products
     @OneToMany(mappedBy = "shopCart", cascade = CascadeType.ALL)
     private List<Product> products;
-
 }

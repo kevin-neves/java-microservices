@@ -1,14 +1,13 @@
 package com.ecommerce.shopcart.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "product")
@@ -30,14 +29,8 @@ public class Product {
     @Column(name = "product_quantity")
     private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "shop_id")
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_cart_id")
     private ShopCart shopCart;
-
-    public Product(Integer productIdReference, String name, Double price, Integer quantity) {
-        this.productIdReference = productIdReference;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-    }
 }

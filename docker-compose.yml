@@ -1,0 +1,93 @@
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    network_mode: bridge
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    network_mode: bridge
+
+  postgres:
+    image: 'postgres:13.1-alpine'
+    container_name: postgres
+    depends_on:
+      - kafka
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    network_mode: bridge
+
+  customer-api:
+    container_name: customer-api
+    image: customer-api
+    build:
+      context: ./api/customer
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8083:8083"
+    restart: always
+    network_mode: bridge
+
+  product-api:
+    container_name: product-api
+    image: product-api
+    build:
+      context: ./api/product
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8082:8082"
+    restart: always
+    network_mode: bridge
+
+  shop-cart-api:
+    container_name: shop-cart-api
+    image: shop-cart-api
+    build:
+      context: ./api/shopCart
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8081:8081"
+    restart: always
+    network_mode: bridge
+
+  shop-validator:
+    container_name: shop-validator
+    image: shop-validator
+    build:
+      context: ./api/shopValidator
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8084:8084"
+    restart: always
+    network_mode: bridge
+
+volumes:
+  db:
+    driver: local
