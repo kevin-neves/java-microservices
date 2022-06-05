@@ -33,54 +33,56 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
-  customer-api:
-    container_name: customer-api
-    image: customer-api
-    build:
-      context: ./api/customer
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    ports:
-      - "127.0.0.1:8083:8083"
-    restart: always
-
-  product-api:
-    container_name: product-api
-    image: product-api
-    build:
-      context: ./api/product
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    ports:
-      - "127.0.0.1:8082:8082"
-    restart: always
-
-  shop-cart-api:
-    container_name: shop-cart-api
-    image: shop-cart-api
-    build:
-      context: ./api/shopCart
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    ports:
-      - "127.0.0.1:8081:8081"
-    restart: always
-
-  shop-validator:
-    container_name: shop-validator
-    image: shop-validator
-    build:
-      context: ./api/shopValidator
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    ports:
-      - "127.0.0.1:8084:8084"
-    restart: always
-
-volumes:
-  db:
-    driver: local
+#  customer-api:
+#    container_name: customer-api
+#    image: customer-api
+#    build:
+#      context: ./api/customer
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - postgres
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+#    ports:
+#      - "8083:8083"
+#    restart: always
+#
+#  product-api:
+#    container_name: product-api
+#    image: product-api
+#    build:
+#      context: ./api/product
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - postgres
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+#    ports:
+#      - "8082:8082"
+#    restart: always
+#
+#  shop-cart-api:
+#    container_name: shop-cart-api
+#    image: shop-cart-api
+#    build:
+#      context: ./api/shopCart
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - postgres
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+#    ports:
+#      - "8081:8081"
+#    restart: always
+#
+#  shop-validator:
+#    container_name: shop-validator
+#    image: shop-validator
+#    build:
+#      context: ./api/shopValidator
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - postgres
+#    ports:
+#      - "8084:8084"
+#    restart: always
