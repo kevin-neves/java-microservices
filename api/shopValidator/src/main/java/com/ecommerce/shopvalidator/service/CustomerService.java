@@ -15,5 +15,4 @@ public class CustomerService {
                 .bodyToMono(CustomerResponse.class)
                 .block();
     }
-
 }
