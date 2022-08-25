@@ -1,37 +1,62 @@
 version: '3'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.0.1
+    container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "22181:2181"
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.0.1
+    container_name: kafka
+    ports:
+      - "9092:9092"
     depends_on:
       - zookeeper
-    ports:
-      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_INTERNAL://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    restart: always
 
   postgres:
     image: 'postgres:13.1-alpine'
     container_name: postgres
     depends_on:
-      - kafka
+      - zookeeper
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: ./api/eureka-server
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8761:8761"
+    restart: always
+
+  admin-server:
+    container_name: admin-server
+    image: admin-server
+    build:
+      context: ./api/admin
+      dockerfile: Dockerfile
+    depends_on:
+      - eureka-server
+    ports:
+      - "9390:9390"
+    restart: always
 
   customer-api:
     container_name: customer-api
@@ -40,9 +65,14 @@ services:
       context: ./api/customer
       dockerfile: Dockerfile
     depends_on:
-      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
+      - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://customer-api:8083
     ports:
-      - "127.0.0.1:8083:8083"
+      - "8083:8083"
     restart: always
 
   product-api:
@@ -52,10 +82,15 @@ services:
       context: ./api/product
       dockerfile: Dockerfile
     depends_on:
-      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
+      - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://product-api:8082
     ports:
-      - "127.0.0.1:8082:8082"
-    restart: always
+      - "8082:8082"
+    restart: always 
 
   shop-cart-api:
     container_name: shop-cart-api
@@ -64,9 +99,16 @@ services:
       context: ./api/shopCart
       dockerfile: Dockerfile
     depends_on:
-      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
+      - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://shop-cart-api:8081
+      - kafka.address=http://kafka:9092
+      - spring.kafka.bootstrap-servers=http://kafka:9092
     ports:
-      - "127.0.0.1:8081:8081"
+      - "8081:8081"
     restart: always
 
   shop-validator:
@@ -76,11 +118,15 @@ services:
       context: ./api/shopValidator
       dockerfile: Dockerfile
     depends_on:
-      - postgres
+      - eureka-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
+      - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://shop-validator:8084
+      - kafka.address=http://kafka:9092
+      - spring.kafka.bootstrap-servers=http://kafka:9092
+      - customer-api=http://customer-api:8083
+      - product-api=http://product-api:8082
     ports:
-      - "127.0.0.1:8084:8084"
+      - "8084:8084"
     restart: always
-
-volumes:
-  db:
-    driver: local

@@ -1,12 +1,16 @@
 package com.ecommerce.shopvalidator.service;
 
 import com.ecommerce.shopvalidator.dto.CustomerResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class CustomerService {
 
-    public static CustomerResponse getCustomer(String identificador) {
-        WebClient webClient = WebClient.create("http://localhost:8083");
+
+    public static CustomerResponse getCustomer(String identificador, String customerAdd) {
+
+        WebClient webClient = WebClient.create(customerAdd);
+
 
         return webClient
                 .get()
@@ -15,5 +19,4 @@ public class CustomerService {
                 .bodyToMono(CustomerResponse.class)
                 .block();
     }
-
 }

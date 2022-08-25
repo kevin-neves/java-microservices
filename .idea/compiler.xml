@@ -9,18 +9,27 @@
         <outputRelativeToContentRoot value="true" />
         <module name="product" />
         <module name="shopValidator" />
+        <module name="java-ecommerce-microservices" />
         <module name="shopCart" />
+        <module name="admin" />
+        <module name="eureka-server" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="actuator" target="11" />
       <module name="dto" target="11" />
+      <module name="gateway" target="11" />
       <module name="shop-validator" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="actuator" options="-parameters" />
+      <module name="admin" options="-parameters" />
       <module name="customer" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="product" options="-parameters" />
       <module name="shopCart" options="-parameters" />
       <module name="shopValidator" options="-parameters" />

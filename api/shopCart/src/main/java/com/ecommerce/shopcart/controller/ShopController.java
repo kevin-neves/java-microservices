@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/compras")
 @RequiredArgsConstructor
-public class ShopController {
+public class ShopController implements ShopControllerApi {
 
     private final ShopService shopService;
     private final SendKafkaMessage sendKafkaMessage;

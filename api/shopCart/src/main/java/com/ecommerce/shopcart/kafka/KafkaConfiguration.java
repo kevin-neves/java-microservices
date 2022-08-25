@@ -20,7 +20,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConfiguration {
 
-    @Value(value = "localhost:29092")
+    @Value(value =  "${kafka.address}")
     private String kafkaAddress;
 
     public ProducerFactory<String, ShopCart> producerFactory() {
