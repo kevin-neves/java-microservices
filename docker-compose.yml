@@ -18,7 +18,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_INTERNAL://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -105,7 +105,8 @@ services:
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
       - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://shop-cart-api:8081
-      - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
+      - kafka.address=http://kafka:9092
+      - spring.kafka.bootstrap-servers=http://kafka:9092
     ports:
       - "8081:8081"
     restart: always
@@ -122,7 +123,10 @@ services:
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
       - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://shop-validator:8084
-      - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
+      - kafka.address=http://kafka:9092
+      - spring.kafka.bootstrap-servers=http://kafka:9092
+      - customer-api=http://customer-api:8083
+      - product-api=http://product-api:8082
     ports:
       - "8084:8084"
     restart: always
