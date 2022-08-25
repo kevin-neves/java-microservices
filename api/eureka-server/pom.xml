@@ -52,7 +52,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>eureka-server</finalName>
+		<finalName>eureka</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

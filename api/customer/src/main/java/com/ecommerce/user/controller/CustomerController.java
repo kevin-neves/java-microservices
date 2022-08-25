@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/customers")
 public class CustomerController implements CustomerApi {
     private final CustomerService userService;
-
     @GetMapping
     public List<CustomerResponse> getCustomers() {
         return userService.listCustomers().stream().map(CustomerResponse::new).collect(Collectors.toList());
