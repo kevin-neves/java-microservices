@@ -13,8 +13,9 @@ This project started during the last part of the Full-Stack developer Course, at
 * kafka: which is a Kafka server for messages between `shop-cart-api` and `shop-validator`. 
 
 ## Diagram
+This is a visualization of the structure of the project until now.
 
-system diagram
+![alt text](https://raw.githubusercontent.com/kevin-neves/java-microservices/main/ecommerceStructure.png)
 
 ## Features
 * The system can be run using only one command through Docker Compose. 
