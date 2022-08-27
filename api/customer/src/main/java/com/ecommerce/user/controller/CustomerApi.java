@@ -16,6 +16,10 @@ public interface CustomerApi {
 
     @RequestMapping(method = RequestMethod.GET, value = "/customers/{cpf}")
     CustomerResponse getCustomer(String cpf);
+
     @RequestMapping(method = RequestMethod.POST, value = "/customers")
     CustomerResponse saveUser(CustomerRequest customerRequest);
+
+    // @RequestMapping(method = RequestMethod.DELETE, value = "/customers/{cpf}")
+    // CustomerResponse deleteUser(String cpf);
 }
