@@ -8,9 +8,9 @@ This project started during the last part of the Full-Stack developer Course, at
 * `products-api` : responsible for CRUD operations for products.
 * `shop-cart-api` : responsible for CRUD operations when creating a **cart object**.
 * `shop-validator` : receives a **cart object** and check for **user** and **products** in the respective services.
-* eureka-server: used for registering the all the services in a Eureka server
-* admin-server: used for registering all the services in a monitoring system server
-* kafka: which is a Kafka server for messages between `shop-cart-api` and `shop-validator`. 
+* `eureka-server`: used for registering the all the services in a Eureka server
+* `admin-server`: used for registering all the services in a monitoring system server
+* `kafka`: which is a Kafka server for messages between `shop-cart-api` and `shop-validator`. 
 
 ## Diagram
 This is a visualization of the structure of the project until now.
