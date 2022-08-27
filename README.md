@@ -24,7 +24,7 @@ This is a visualization of the structure of the project until now.
 2. Then **.jar** file is copied to a new lightweight **alpine-jre** image. The final container is about 200 MB in size.
 * Each service is completely independent of others, and has it own schema on the database.
 * Kafka is used for the communication between `shop-cart-api` and `shop-validator`. The docker image used don't require Zookeeper, which reduces in 700 MB the total size of the project.
-* `shop-validator` uses Http requests for communicetion with other services to validate information.
+* `shop-validator` uses Http requests for communication with other services to validate information.
 
 ## Installation and running
 
