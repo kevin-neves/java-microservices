@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 30s
+  scrape_timeout: 10s
+
+rule_files:
+  - alert.yml
+
+scrape_configs:
+  - job_name: services
+    metrics_path: /actuator/metrics
+    static_configs:
+      - targets:
+          - 'prometheus:9090'
+          - 'customer-api:8083'
+          - 'product-api:8082'
+          - 'shop-cart-api:8081'
+          - 'shop-validator8084'
