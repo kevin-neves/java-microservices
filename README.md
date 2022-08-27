@@ -20,14 +20,14 @@ system diagram
 * The system can be run using only one command through Docker Compose. 
 * Each Java container is built using two steps:
 1. The **.jar** file is compiled in a **Maven** image container.
-2. Then **.jar** file is copied to a new lightweight **alpine-jre** image. The final container is about 200MB in size.
-* Each service is completely independent from others, and has it own schema on the database.
+2. Then **.jar** file is copied to a new lightweight **alpine-jre** image. The final container is about 200 MB in size.
+* Each service is completely independent of others, and has it own schema on the database.
 * Kafka is used for the communication between `shop-cart-api` and `shop-validator`. The docker image used don't require Zookeeper, which reduces in 700 MB the total size of the project.
 * `shop-validator` uses Http requests for communicetion with other services to validate information.
 
 ## Installation and running
 
-Even though each service could be run individually, is recommended that you use [Docker Compose](https://docs.docker.com/compose/install/) to start all services togheter, and in the correct order.
+Even though each service could be run individually, is recommended that you use [Docker Compose](https://docs.docker.com/compose/install/) to start all services together, and in the correct order.
 
 ```
 docker-compose up -d --build
