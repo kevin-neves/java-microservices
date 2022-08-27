@@ -1,6 +1,6 @@
 # Microservice Shop Application, utilizing Postgres, Kafka and Docker
 
-## Motivation
+## Motivation 
 This project started during the last part of the Full-Stack developer Course, at Let's Code programming school. The main goal of the project is to create a fully integrated distributed system, utilizing some of the most used technologies available today.
 
 ## Services
