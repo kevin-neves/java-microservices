@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/compras")
+@RequestMapping("/shop-cart")
 @RequiredArgsConstructor
 public class ShopController implements ShopControllerApi {
 
