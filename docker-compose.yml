@@ -73,8 +73,8 @@ services:
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
       - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://customer-api:8083
-    ports:
-      - "8083:8083"
+    # ports:
+    #   - "8083:8083"
     restart: always
 
   product-api:
@@ -90,8 +90,8 @@ services:
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://admin-server:9390/
       - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://product-api:8082
-    ports:
-      - "8082:8082"
+    # ports:
+    #   - "8082:8082"
     restart: always 
 
   shop-cart-api:
@@ -109,8 +109,8 @@ services:
       - SPRING_BOOT_ADMIN_CLIENT_INSTANCE_SERVICE_URL=http://shop-cart-api:8081
       - kafka.address=http://kafka:9092
       - spring.kafka.bootstrap-servers=http://kafka:9092
-    ports:
-      - "8081:8081"
+    # ports:
+    #   - "8081:8081"
     restart: always
 
   shop-validator:
@@ -129,8 +129,8 @@ services:
       - spring.kafka.bootstrap-servers=http://kafka:9092
       - customer-api=http://customer-api:8083
       - product-api=http://product-api:8082
-    ports:
-      - "8084:8084"
+    # ports:
+    #   - "8084:8084"
     restart: always
 
   prometheus:
@@ -153,6 +153,22 @@ services:
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
       - grafana-data:/var/lib/grafana
+
+  gateway:
+    container_name: go-gateway
+    image: go-gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - CUSTOMERS_ADDR=http://customer-api:8083/customers
+      - PRODUCTS_ADDR=http://product-api:8082/products
+      - SHOP_CART_ADDR=http://shop-cart-api:8081/shop-cart
+    depends_on:
+      - shop-cart-api
+    restart: always
 
 volumes:
   prometheus-data:
