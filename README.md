@@ -1,4 +1,4 @@
-# Microservice Shop Application, utilizing Postgres, Kafka, Docker, Prometheus and Grafana 
+# Microservice Shop Java Application, utilizing Golang gateway, Postgres, Kafka, Docker, Prometheus and Grafana
 
 ## Motivation 
 This project started during the last part of the Full-Stack developer Course, at Let's Code programming school. The main goal of the project is to create a fully integrated distributed system, utilizing some of the most used technologies available today.
