@@ -45,8 +45,4 @@ In order to run the full project without any problems, is highly recommended tha
 
 * There are lots of small implementations that are missing in each service.
 * Integrated tests will be added soon, since they are really important for microservices.
-<<<<<<< HEAD
-* A gateway, with authentication and authorization, as well as a Redis cache system for storing the requests.
-=======
 * New features to the gateway, such as authentication and authorization, as well as a Redis cache system for storing the responses.
->>>>>>> 4fb3ddc (updating readme)
