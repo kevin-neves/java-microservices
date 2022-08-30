@@ -4,11 +4,12 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-var productsAdd string = "http://localhost:8082/products"
+var productsAdd string = os.Getenv("PRODUCTS_ADDR") //"http://localhost:8082/products"
 
 func ProductProxy(c *gin.Context) {
 	remote, err := url.Parse(productsAdd)

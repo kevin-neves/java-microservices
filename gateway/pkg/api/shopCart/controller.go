@@ -4,11 +4,12 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-var shopCartAdd string = "http://localhost:8081/shop-cart"
+var shopCartAdd string = os.Getenv("SHOP_CART_ADDR") //"http://localhost:8081/shop-cart"
 
 func ShopCartProxy(c *gin.Context) {
 	remote, err := url.Parse(shopCartAdd)

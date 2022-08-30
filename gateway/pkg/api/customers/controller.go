@@ -4,11 +4,12 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-var customersAddr string = "http://localhost:8083/customers"
+var customersAddr string = os.Getenv("CUSTOMERS_ADDR") //"http://localhost:8083/customers"
 
 func CustomerProxy(c *gin.Context) {
 	remote, err := url.Parse(customersAddr)
