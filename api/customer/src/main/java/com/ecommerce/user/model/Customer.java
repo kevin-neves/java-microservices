@@ -19,14 +19,10 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @Column(name = "customer_name")
     private String name;
-
-    @Column(name = "customer_code")
-    @GeneratedValue
-    private UUID customerUuid;
 
     @Column
     private String address;
@@ -41,9 +37,8 @@ public class Customer {
 //    private List<Purchase> purchases;
 
 
-    public Customer(String name, UUID customerUuid, String address, String cpf, String email) {
+    public Customer( String name, String address, String cpf, String email) {
         this.name = name;
-        this.customerUuid = customerUuid;
         this.address = address;
         this.cpf = cpf;
         this.email = email;

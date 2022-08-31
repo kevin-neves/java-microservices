@@ -25,7 +25,6 @@ public class CustomerRequest {
     public static Customer createFromRequest(CustomerRequest customerRequest) {
         Customer customer = new Customer(
                 customerRequest.getName(),
-                UUID.randomUUID(),
                 customerRequest.getAddress(),
                 customerRequest.getCpf(),
                 customerRequest.getEmail());

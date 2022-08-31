@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,9 @@ public class CustomerService {
         return new CustomerResponse(user);
     }
 
-    public Customer getCustomerByCpf(String cpf) {
-        return customerRepository.findByCpf(cpf);
+    public Optional<Customer> getCustomerById(String id) {
+        return customerRepository.findById(id);
     }
+
+
 }

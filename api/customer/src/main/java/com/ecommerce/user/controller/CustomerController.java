@@ -21,9 +21,9 @@ public class CustomerController implements CustomerApi {
         return userService.listCustomers().stream().map(CustomerResponse::new).collect(Collectors.toList());
     }
 
-    @GetMapping("/{cpf}")
-    public CustomerResponse getCustomer(@PathVariable String cpf) {
-        return new CustomerResponse(userService.getCustomerByCpf(cpf));
+    @GetMapping("/{id}")
+    public CustomerResponse getCustomer(@PathVariable String id) {
+        return new CustomerResponse(userService.getCustomerById(id));
     }
 
     @PostMapping
