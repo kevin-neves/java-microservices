@@ -41,7 +41,7 @@ docker-compose up -d --build
 ```
 In order to run the full project without any problems, is highly recommended that you have at least **8 GB of RAM** in your computer.
 
-## Features to be added in the future
+## Features that will be added in the future
 
 * There are lots of small implementations that are missing in each service.
 * Integrated tests will be added soon, since they are really important for microservices.
